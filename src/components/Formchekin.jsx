@@ -2,7 +2,7 @@ import React from 'react';
 
 function Formchekin() {
     return (
-        <div className="border-none p-9 rounded flex justify-center bg-white shadow-2xl w-280">
+        <div className="border-none p-9 rounded flex justify-center bg-white shadow-2xl w-280 relative top-60" >
             <form className="flex items-end gap-12">
                 
                 <div className="flex flex-col">
