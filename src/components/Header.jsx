@@ -26,11 +26,11 @@ const Hearder = () => {
         {/* Logo */}
         <div className="flex items-center">
           <Link to="/" className="group">
-            <div className="bg-white/75 w-24 rounded-full p-1 hover:scale-110 transition-all duration-300 ease-in-out shadow-lg">
+            <div className="relative right-25 w-55  hover:scale-110 transition-all duration-300 ease-in-out">
               <img
-                src="image.png"
+                src="lgg.png"
                 alt="Comfy Logo"
-                className="h-16 w-auto"
+                className="h-30 w-600"
               />
             </div>
           </Link>
@@ -47,14 +47,6 @@ const Hearder = () => {
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-yellow-600 transition-all duration-300 group-hover:w-full"></span>
           </Link>
           <Link
-            to="/rooms"
-            className={`relative hover:text-yellow-600 transition-all duration-300 ease-in-out group ${isActive('/rooms') ? 'text-yellow-600' : ''
-              }`}
-          >
-            ROOMS
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-yellow-600 transition-all duration-300 group-hover:w-full"></span>
-          </Link>
-          <Link
             to="/about"
             className={`relative hover:text-yellow-600 transition-all duration-300 ease-in-out group ${isActive('/about') ? 'text-yellow-600' : ''
               }`}
@@ -62,6 +54,15 @@ const Hearder = () => {
             ABOUT
             <span className="absolute -bottom-1 left-0 h-0.5 bg-yellow-600 transition-all duration-300 group-hover:w-full"></span>
           </Link>
+          <Link
+            to="/rooms"
+            className={`relative hover:text-yellow-600 transition-all duration-300 ease-in-out group ${isActive('/rooms') ? 'text-yellow-600' : ''
+              }`}
+          >
+            ROOMS
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-yellow-600 transition-all duration-300 group-hover:w-full"></span>
+          </Link>
+          
           <Link
             to="/contact"
             className={`relative hover:text-yellow-600 transition-all duration-300 ease-in-out group ${isActive('/contact') ? 'text-yellow-600' : ''

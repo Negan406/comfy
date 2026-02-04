@@ -8,11 +8,28 @@ const Home = () => {
   const [buttonRef, buttonVisible] = useScrollAnimation(0.1);
 
   return (
-    <div className=" relative h-screen w-screen
-                    bg-[url('bg.jpeg')] bg-cover bg-center bg-no-repeat bottom-20 ">
+    <div className="relative h-screen w-screen bottom-20 overflow-hidden">
+
+      {/* Scrolling Background */}
+      <div className="absolute inset-0 z-0">
+        <div className=" flex h-full w-max">
+          {/* Duplicated images for seamless looping */}
+          {[
+            '/bg.jpeg',
+            
+          ].map((src, index) => (
+            <img
+              key={index}
+              src={src}
+              alt=""
+              className="h-full w-screen object-cover shrink-0"
+            />
+          ))}
+        </div>
+      </div>
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/80
+      <div className="absolute inset-0 bg-black/80 z-10
                       flex flex-col items-center justify-center gap-6 ">
 
 
@@ -21,7 +38,7 @@ const Home = () => {
           className={`text-white text-2xl font-semibold tracking-widest relative top-7 transition-all duration-1000 ${subtitleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
         >
-          HOTEL &amp; RESORT
+          HOTEL & RESORT
         </h4>
 
         <h1
@@ -39,7 +56,7 @@ const Home = () => {
         >
           Discover Now
         </button>
-        <div className=''>
+        <div className=' relative top-40'>
           <Formchekin />
         </div>
 
