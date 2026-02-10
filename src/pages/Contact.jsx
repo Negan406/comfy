@@ -1,6 +1,7 @@
 import React from "react";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 import { FiPhone, FiMail, FiMapPin, FiClock } from "react-icons/fi";
+import {BsSend} from "react-icons/bs";
 
 const Contact = () => {
   const [ref, visible] = useScrollAnimation(0.2);
@@ -53,8 +54,67 @@ const Contact = () => {
    
       </div><br />
       <div>
-        <img className="w-200 relative left-90 rounded-2xl " src="hd.jpg" alt="" />
-    </div>
+        <form className=" bg-white/20 backdrop-blur-md shadow-2xl border border-white/20 p-4 rounded-2xl w-220 h-170 relative left-58">
+          <h1 className="text-5xl text-center text-yellow-600 font-serif relative mb-15 top-5">Leave a Message</h1>
+
+          <div className="flex flex-col gap-4">
+          <div className="mb-4 ">
+            <label className="block text-black font-bold mb-2" htmlFor="name">
+              Name
+            </label>
+            <input
+              className="shadow appearance-none border rounded-xl w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+              id="name"
+              type="text"
+              placeholder="Your Name"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-black font-bold mb-2" htmlFor="email">
+              Email
+            </label>
+            <input
+              className="shadow appearance-none border rounded-xl w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+              id="email"
+              type="email"
+              placeholder="Your Email"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-black font-bold mb-2" htmlFor="phone">
+              Phone
+            </label>
+            
+            <input
+              className="shadow appearance-none border rounded-xl w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+              id="phone"
+              type="tel"
+              placeholder="Your Phone"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-black font-bold mb-2" htmlFor="message">
+              Message
+            </label>
+            <textarea
+              className="shadow appearance-none border rounded-xl w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+              id="message"
+              rows="4"
+              placeholder="Your Message"
+            ></textarea>
+          </div>
+          </div>
+          <div className="flex items-center justify-center mt-6 ">
+            <button
+              className="bg-yellow-600 border rounded-2xl text-white font-serif w-200 py-2 px-4 hover:scale-101 transition-transform duration-400 cursor-pointer"
+              type="submit"
+            >
+              <BsSend className="inline-block mr-2" />
+              Send Message
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

@@ -73,12 +73,12 @@ const Hearder = () => {
           </Link>
 
           {/* Login Button */}
-          <button className="ml-4 px-6 py-2 bg-yellow-600 text-white font-semibold rounded-lg hover:bg-yellow-500 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-yellow-600/50">
+          <Link to={"/login"} className="ml-4 px-6 py-2 bg-yellow-600 text-white font-semibold rounded-lg hover:bg-yellow-500 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-yellow-600/50">
             LOGIN
-          </button>
-        </div>
+          </Link>
+          </div>
 
-      </div>
+        </div>
     </nav>
   );
 };

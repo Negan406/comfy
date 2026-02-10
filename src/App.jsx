@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Rooms from "./pages/Rooms";
+import Login from "./pages/login/login";
 
 function App() {
   const homeRef = useRef(null);
@@ -36,6 +37,10 @@ function App() {
       <div className="pt-20">
         <Routes>
           {/* SAME PAGE (scroll sections) */}
+          <Route
+            path="/login"
+            element={<Login />}
+          />
           <Route
             path="/"
             element={
