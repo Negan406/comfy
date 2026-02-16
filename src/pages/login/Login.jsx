@@ -9,7 +9,7 @@ function Login() {
 
         <div className="w-1/2 p-10 flex flex-col justify-center gap-10">
           <h1 className="text-3xl font-bold text-yellow-700">
-            Ready to start your success story?
+            Welcome Back!
           </h1>
 
           <form className="flex flex-col gap-10">

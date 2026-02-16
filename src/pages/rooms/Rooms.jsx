@@ -1,6 +1,6 @@
 import React from "react";
-import { data } from "react-router-dom";
-import roomsData from "./data";
+import { data, Link } from "react-router-dom";
+import roomsData from "../../../public/data";
 
 const Rooms = () => {
   return (
@@ -46,12 +46,12 @@ const Rooms = () => {
               <p className="text-gray-600 mb-4">
                 {im.description}
               </p>
-              <button className="border border-black px-6 py-2 rounded-full hover:bg-black hover:text-white transition">
+              <Link to={`/rooms/${im.id}`} className="border border-black px-6 py-2 rounded-full hover:bg-black hover:text-white transition">
                 Take Yours
-              </button>
-              </div>
-              </div>
-          ))}
+              </Link>
+            </div>
+          </div>
+        ))}
             
             
           </div>

@@ -5,8 +5,10 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import Rooms from "./pages/Rooms";
+import Rooms from "./pages/rooms/Rooms";
+import Details from "./pages/rooms/Details";
 import Login from "./pages/login/login";
+import Register from "./pages/login/register";
 
 function App() {
   const homeRef = useRef(null);
@@ -41,6 +43,17 @@ function App() {
             path="/login"
             element={<Login />}
           />
+          
+          <Route
+            path="/register"
+            element={<Register />}
+          />
+
+          <Route
+            path="/rooms/:id"
+            element={<Details />}
+          />
+
           <Route
             path="/"
             element={

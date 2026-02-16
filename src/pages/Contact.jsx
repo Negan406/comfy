@@ -53,68 +53,71 @@ const Contact = () => {
         </div>
    
       </div><br />
-      <div>
-        <form className=" bg-white/20 backdrop-blur-md shadow-2xl border border-white/20 p-4 rounded-2xl w-220 h-170 relative left-58">
-          <h1 className="text-5xl text-center text-yellow-600 font-serif relative mb-15 top-5">Leave a Message</h1>
+      <div className="mt-20">
+  <form className="bg-white/20 backdrop-blur-md shadow-2xl border border-white/20 p-8 rounded-2xl max-w-4xl mx-auto">
+    
+    <h1 className="text-4xl text-center text-yellow-600 font-serif mb-10">
+      Leave a Message
+    </h1>
 
-          <div className="flex flex-col gap-4">
-          <div className="mb-4 ">
-            <label className="block text-black font-bold mb-2" htmlFor="name">
-              Name
-            </label>
-            <input
-              className="shadow appearance-none border rounded-xl w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-              id="name"
-              type="text"
-              placeholder="Your Name"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-black font-bold mb-2" htmlFor="email">
-              Email
-            </label>
-            <input
-              className="shadow appearance-none border rounded-xl w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
-              type="email"
-              placeholder="Your Email"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-black font-bold mb-2" htmlFor="phone">
-              Phone
-            </label>
-            
-            <input
-              className="shadow appearance-none border rounded-xl w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-              id="phone"
-              type="tel"
-              placeholder="Your Phone"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-black font-bold mb-2" htmlFor="message">
-              Message
-            </label>
-            <textarea
-              className="shadow appearance-none border rounded-xl w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-              id="message"
-              rows="4"
-              placeholder="Your Message"
-            ></textarea>
-          </div>
-          </div>
-          <div className="flex items-center justify-center mt-6 ">
-            <button
-              className="bg-yellow-600 border rounded-2xl text-white font-serif w-200 py-2 px-4 hover:scale-101 transition-transform duration-400 cursor-pointer"
-              type="submit"
-            >
-              <BsSend className="inline-block mr-2" />
-              Send Message
-            </button>
-          </div>
-        </form>
+    <div className="flex flex-col gap-6">
+
+      <div>
+        <label className="block text-black font-bold mb-2">
+          Name
+        </label>
+        <input
+          className="border rounded-xl w-full py-3 px-4 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          type="text"
+          placeholder="Your Name"
+        />
       </div>
+
+      <div>
+        <label className="block text-black font-bold mb-2">
+          Email
+        </label>
+        <input
+          className="border rounded-xl w-full py-3 px-4 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          type="email"
+          placeholder="Your Email"
+        />
+      </div>
+
+      <div>
+        <label className="block text-black font-bold mb-2">
+          Phone
+        </label>
+        <input
+          className="border rounded-xl w-full py-3 px-4 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          type="tel"
+          placeholder="Your Phone"
+        />
+      </div>
+
+      <div>
+        <label className="block text-black font-bold mb-2">
+          Message
+        </label>
+        <textarea
+          className="border rounded-xl w-full py-3 px-4 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          rows="4"
+          placeholder="Your Message"
+        />
+      </div>
+
+      <button
+        className="bg-yellow-600 text-white font-serif py-3 w-80 mx-auto rounded-2xl hover:scale-102 transition-transform duration-300"
+        type="submit"
+      >
+        <BsSend className="inline-block mr-2" />
+        Send Message
+      </button>
+
+    </div>
+  </form>
+</div>
+
     </div>
   );
 };
