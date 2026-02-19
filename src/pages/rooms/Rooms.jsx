@@ -1,6 +1,6 @@
 import React from "react";
-import { data, Link } from "react-router-dom";
-import roomsData from "../../../public/data";
+import { Link } from "react-router-dom";
+import roomsData from "./data";
 
 const Rooms = () => {
   return (
@@ -24,8 +24,7 @@ const Rooms = () => {
         <div className="text-center mb-14">
           <h2 className="text-4xl font-serif mb-4">Choose Your Room</h2>
           <p className="text-gray-600 max-w-2xl font-serif mx-auto">
-            Discover our carefully designed rooms that combine elegance,
-            comfort, and modern amenities for an unforgettable stay.
+            
           </p>
         </div>
 
