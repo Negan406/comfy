@@ -7,7 +7,7 @@ function About() {
     const [rightImageRef, rightImageVisible] = useScrollAnimation(0.2);
 
     return (
-        <div className="p-24 flex flex-row items-center justify-center gap-16 relative bottom-15">
+        <div className=" bg-gray-20 y- p-24 flex flex-row items-center justify-center gap-16 relative bottom-15">
 
             {/* Texte */}
             <div

@@ -2,6 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function Register() {
+  
+  
+
+  
     return (
         <div>
              <div className="w-full h-screen flex items-center justify-center bg-gray-100 p-10">

@@ -1,121 +1,167 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import PageTransition from "./components/PageTransition";
+import LoadingOverlay from "./components/LoadingOverlay";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Rooms from "./pages/rooms/Rooms";
 import Details from "./pages/rooms/Details";
-import Login from "./pages/login/login";
-import Register from "./pages/login/register";
+import Login from "./pages/login/Login";
+import Register from "./pages/login/Register";
 
 function App() {
   const homeRef = useRef(null);
   const aboutRef = useRef(null);
   const contactRef = useRef(null);
-
   const location = useLocation();
 
-  // Scroll to section when URL changes
+  // Global user state
+  const [user, setUser] = useState(false); // false → not logged in
+  const [loading, setLoading] = useState(true);
+  const [isPageLoading, setIsPageLoading] = useState(false);
+
+  // Initial loading simulation
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Determine transition key to group single-page routes
+  const isMainPage = ["/", "/about", "/contact"].includes(location.pathname);
+  const transitionKey = isMainPage ? "main-scroller" : location.pathname;
+
+  // Scroll and Page Loading behavior management
   useEffect(() => {
     if (location.pathname === "/") {
       window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    if (location.pathname === "/about") {
+    } else if (location.pathname === "/about") {
       aboutRef.current?.scrollIntoView({ behavior: "smooth" });
-    }
-
-    if (location.pathname === "/contact") {
+    } else if (location.pathname === "/contact") {
       contactRef.current?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // For any other page change (e.g., /rooms), trigger brief loader and jump to top
+      const isRoomDetails = location.pathname.startsWith("/rooms/") && location.pathname !== "/rooms";
+
+      if (!loading && !isRoomDetails) {
+        setIsPageLoading(true);
+        const timer = setTimeout(() => {
+          setIsPageLoading(false);
+          window.scrollTo(0, 0);
+        }, 800);
+        return () => clearTimeout(timer);
+      } else {
+        window.scrollTo(0, 0);
+      }
     }
-  }, [location]);
+  }, [location, loading]);
 
   return (
     <div className="overflow-hidden">
-      <Header />
+      <AnimatePresence mode="wait">
+        {(loading || isPageLoading) && <LoadingOverlay key="loader" />}
+      </AnimatePresence>
+
+      <Header user={user} setUser={setUser} />
 
       <div className="pt-20">
-        <Routes>
-          {/* SAME PAGE (scroll sections) */}
-          <Route
-            path="/login"
-            element={<Login />}
-          />
-          
-          <Route
-            path="/register"
-            element={<Register />}
-          />
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={transitionKey}>
+            {/* Login & Register */}
+            <Route
+              path="/login"
+              element={
+                <PageTransition>
+                  <Login setUser={setUser} />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <PageTransition>
+                  <Register />
+                </PageTransition>
+              }
+            />
 
-          <Route
-            path="/rooms/:id"
-            element={<Details />}
-          />
+            {/* Rooms */}
+            <Route
+              path="/rooms"
+              element={
+                <PageTransition>
+                  <Rooms />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/rooms/:id"
+              element={
+                <PageTransition>
+                  <Details />
+                </PageTransition>
+              }
+            />
 
-          <Route
-            path="/"
-            element={
-              <>
-                <section ref={homeRef}>
-                  <Home />
-                </section>
-
-                <section ref={aboutRef}>
-                  <About />
-                </section>
-
-                <section ref={contactRef}>
-                  <Contact />
-                </section>
-              </>
-            }
-          />
-
-          <Route
-            path="/about"
-            element={
-              <>
-                <section ref={homeRef}>
-                  <Home />
-                </section>
-
-                <section ref={aboutRef}>
-                  <About />
-                </section>
-
-                <section ref={contactRef}>
-                  <Contact />
-                </section>
-              </>
-            }
-          />
-
-          <Route
-            path="/contact"
-            element={
-              <>
-                <section ref={homeRef}>
-                  <Home />
-                </section>
-
-                <section ref={aboutRef}>
-                  <About />
-                </section>
-
-                <section ref={contactRef}>
-                  <Contact />
-                </section>
-              </>
-            }
-          />
-
-          {/* SEPARATE PAGE */}
-          <Route path="/rooms" element={<Rooms />} />
-        </Routes>
+            {/* Single page scroll sections */}
+            <Route
+              path="/"
+              element={
+                <PageTransition>
+                  <section ref={homeRef}>
+                    <Home />
+                  </section>
+                  <section ref={aboutRef}>
+                    <About />
+                  </section>
+                  <section ref={contactRef}>
+                    <Contact />
+                  </section>
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/about"
+              element={
+                <PageTransition>
+                  <section ref={homeRef}>
+                    <Home />
+                  </section>
+                  <section ref={aboutRef}>
+                    <About />
+                  </section>
+                  <section ref={contactRef}>
+                    <Contact />
+                  </section>
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/contact"
+              element={
+                <PageTransition>
+                  <section ref={homeRef}>
+                    <Home />
+                  </section>
+                  <section ref={aboutRef}>
+                    <About />
+                  </section>
+                  <section ref={contactRef}>
+                    <Contact />
+                  </section>
+                </PageTransition>
+              }
+            />
+          </Routes>
+        </AnimatePresence>
       </div>
-      <Footer/>
+
+      <Footer />
     </div>
   );
 }

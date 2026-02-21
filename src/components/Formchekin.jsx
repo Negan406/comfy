@@ -1,6 +1,8 @@
 import React from 'react';
 
 function Formchekin() {
+    
+    
     return (
         <div className="p-8 rounded-2xl flex justify-center bg-white/20 backdrop-blur-md shadow-2xl border border-white/20">
             <form className="flex flex-col md:flex-row items-end gap-6 text-white">
