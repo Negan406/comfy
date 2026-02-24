@@ -2,7 +2,14 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
-function Login({ setUser }) {
+function Login({ setUser  }) {
+
+  const users = [
+  { email: "soufianeaqli@gmail.com", password: "soufiane", role: "admin" },
+  { email: "soufianeaqli12@gmail.com", password: "soufiane", role: "client" },
+  { email: "soufianeaqli13@gmail.com", password: "soufiane", role: "receptionniste" }
+];
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(null);
@@ -10,24 +17,50 @@ function Login({ setUser }) {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsLoading(true);
+const handleSubmit = (e) => {
+  e.preventDefault();
+  setIsLoading(true);
 
-    // Simulate network request
-    setTimeout(() => {
-      if (email === "hpop5640@gmail.com" && password === "123456") {
-        setMessage({ text: "Login successful ", type: "success" });
-        setUser(true);
-        setTimeout(() => navigate("/"), 1000);
-      } else {
-        setMessage({ text: "Invalid email or password ❌", type: "error" });
-        setUser(false);
-        setIsLoading(false);
-        setTimeout(() => setMessage(null), 3000);
+  setTimeout(() => {
+
+    const foundUser = users.find(
+      (u) =>
+        u.email === email &&
+        u.password === password
+    );
+
+    if (foundUser) {
+      setMessage({ text: "Login successful ✅", type: "success" });
+      setTimeout(() => setMessage(null), 3000);
+      setUser(foundUser);
+
+      // Redirection automatique selon rôle
+      switch (foundUser.role) {
+        case "admin":
+          navigate("/");
+        
+          break;
+        case "client":
+          navigate("/");
+         
+          break;
+        case "receptionniste":
+          navigate("/");
+          
+          break;
+        default:
+          navigate("/");
       }
-    }, 1500);
-  };
+
+    } else {
+      setMessage({ text: "Invalid email or password ❌", type: "error" });
+      setUser(null);
+      setIsLoading(false);
+      setTimeout(() => setMessage(null), 3000);
+    }
+
+  }, 1500);
+};
 
   return (
     <div className="w-full h-screen flex items-center justify-center bg-gray-100 p-10">

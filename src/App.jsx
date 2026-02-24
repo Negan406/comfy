@@ -10,17 +10,25 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Rooms from "./pages/rooms/Rooms";
 import Details from "./pages/rooms/Details";
-import Login from "./pages/login/Login";
-import Register from "./pages/login/Register";
+import Login from "./pages/login/login";
+import Register from "./pages/login/register";
+import Reservations from "./pages/Clients/Reservations";
 
 function App() {
+  const [reservations, setReservations] = useState(() => {
+    const saved = localStorage.getItem("reservations");
+    return saved ? JSON.parse(saved) : [];
+  });
   const homeRef = useRef(null);
   const aboutRef = useRef(null);
   const contactRef = useRef(null);
   const location = useLocation();
 
   // Global user state
-  const [user, setUser] = useState(false); // false → not logged in
+  const [user, setUser] = useState(() => {
+    const saved = localStorage.getItem("user");
+    return saved ? JSON.parse(saved) : false;
+  }); // false → not logged in
   const [loading, setLoading] = useState(true);
   const [isPageLoading, setIsPageLoading] = useState(false);
 
@@ -31,6 +39,18 @@ function App() {
     }, 2000);
     return () => clearTimeout(timer);
   }, []);
+
+  // Sync with localStorage
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
+
+  useEffect(() => {
+    localStorage.setItem("reservations", JSON.stringify(reservations));
+  }, [reservations]);
+  const zid = (res) => {
+    setReservations((e) => [...e, res]);
+  };
 
   // Determine transition key to group single-page routes
   const isMainPage = ["/", "/about", "/contact"].includes(location.pathname);
@@ -103,10 +123,11 @@ function App() {
               path="/rooms/:id"
               element={
                 <PageTransition>
-                  <Details />
+                  <Details user={user} add={zid} />
                 </PageTransition>
               }
             />
+            <Route path="/Reservation" element={<Reservations reservations={reservations} />} />
 
             {/* Single page scroll sections */}
             <Route

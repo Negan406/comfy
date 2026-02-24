@@ -2,6 +2,7 @@ import React from "react";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 import { FiPhone, FiMail, FiMapPin, FiClock } from "react-icons/fi";
 import {BsSend} from "react-icons/bs";
+import { space } from "postcss/lib/list";
 
 const Contact = () => {
   const [ref, visible] = useScrollAnimation(0.2);
@@ -111,7 +112,7 @@ const Contact = () => {
         type="submit"
       >
         <BsSend className="inline-block mr-2" />
-        Send Message
+        Send Message 
       </button>
 
     </div>

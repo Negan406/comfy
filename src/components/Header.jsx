@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FiUser, FiSettings, FiHelpCircle, FiLogOut } from 'react-icons/fi';
+import { RiHomeHeartLine } from 'react-icons/ri';
 
 const Header = ({ user, setUser }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -57,19 +58,25 @@ const Header = ({ user, setUser }) => {
               {/* Dropdown Menu */}
               {dropdownOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg text-black py-2 flex flex-col z-50">
+            
                  
                   <Link
                     to="/help"
                     className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 transition-colors"
                     onClick={() => setDropdownOpen(false)}
                   >
-                    <FiUser /> My Account
+                    <FiUser className="w-5 h-5" /> My Account
                   </Link>
+                  {user?.role=="client" && (
+                    <Link to="/Reservation" className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 transition-colors">
+                      <RiHomeHeartLine className="w-5 h-5" /> My Reservations
+                    </Link>
+                  )}
                   <button
                     onClick={handleLogout}
                     className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 transition-colors w-full text-left"
                   >
-                    <FiLogOut /> Logout
+                    <FiLogOut className="w-5 h-5" /> Logout
                   </button>
                 </div>
               )}

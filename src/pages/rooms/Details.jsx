@@ -5,8 +5,10 @@ import { MdFamilyRestroom, MdOutlineSquareFoot, MdBed } from "react-icons/md";
 import {  IoMdClose } from "react-icons/io";
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
 import { useState } from "react";
-function Details() {
+import Bookclient from "../Clients/Bookclient";
+function Details({user,add}) {
   const [index, setIndex] = useState(0);
+  const [openForm, setOpenForm] = useState(false);
   const [fade, setFade] = useState(false);
   const { id } = useParams();
   const room = roomsData.find((r) => r.id === parseInt(id));
@@ -18,6 +20,9 @@ function Details() {
     );
     setFade(false);
   }, 300); // durée de l'animation
+};
+const ajt = (res) => {
+  add(res);
 };
 
 const prevImage = () => {
@@ -138,9 +143,30 @@ const prevImage = () => {
           </div>
 
           {/* Booking Button */}
-          <button className="w-90 bg-black mx-22 text-white py-3 rounded-2xl hover:bg-gray-800 hover:scale-101 transition-transform duration-500">
-            Book Now
-          </button>
+          {user?.role === "client" && (
+            <button onClick={() => setOpenForm(true)} className="w-90 bg-black mx-22 text-white py-3 rounded-2xl hover:bg-gray-800 hover:scale-101 transition-transform duration-500">
+              Book Now
+            </button>
+          )}
+          {openForm && (
+  <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
+    
+    <div className="bg-white p-8 rounded-2xl w-[500px] relative animate-scaleIn">
+
+      {/* Close Button */}
+      <button
+        onClick={() => setOpenForm(false)}
+        className="absolute top-3 right-3 text-gray-600 hover:text-black text-xl"
+      >
+        <IoMdClose className="w-7 h-7" />
+      </button>
+
+      {/* Ton Formulaire */}
+      <Bookclient ajouter={ajt} />
+
+    </div>
+  </div>
+)}
 
         </div>
       </div>
